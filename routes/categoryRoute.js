@@ -4,14 +4,10 @@ const routerCategory = express.Router();
 const {
   createCategory,
   getCategories,
+  getCategory,
 } = require("../services/categoryService");
 
-routerCategory.post("/", async (req, res) => {
-  await createCategory(req, res);
-});
-
-routerCategory.get("/", async (req, res) => {
-  await getCategories(req, res);
-});
+routerCategory.route("/").post(createCategory).get(getCategories);
+routerCategory.route("/:id").get(getCategory);
 
 module.exports = { routerCategory };
